@@ -16,6 +16,7 @@ import { useEventForm } from '../hooks/useEventForm.ts';
 import { Event, EventForm, RepeatType } from '../types.ts';
 import { findOverlappingEvents } from '../utils/eventOverlap.ts';
 import { getTimeErrorMessage } from '../utils/timeValidation.ts';
+import { validateEventForm } from '../utils/validateEventForm.ts';
 
 export const EventEdit = ({
   events,
@@ -66,7 +67,14 @@ export const EventEdit = ({
   ];
 
   const addOrUpdateEvent = async () => {
-    if (!title || !date || !startTime || !endTime) {
+    const formData = {
+      title,
+      date,
+      startTime,
+      endTime,
+    };
+
+    if (!validateEventForm(formData)) {
       toast({
         title: '필수 정보를 모두 입력해주세요.',
         status: 'error',
@@ -75,6 +83,11 @@ export const EventEdit = ({
       });
       return;
     }
+
+    // if (!validateEventForm(formData)) {
+    //   showToast(toast, { title: '필수 정보를 모두 입력해주세요.', status: 'error' });
+    //   return;
+    // }
 
     if (startTimeError || endTimeError) {
       toast({

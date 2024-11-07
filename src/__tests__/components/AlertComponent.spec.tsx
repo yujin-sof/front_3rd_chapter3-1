@@ -4,7 +4,7 @@ import { describe, it, expect, vi } from 'vitest';
 
 import { AlertComponent } from '../../components/AlertComponent';
 
-describe('AlertComponent', () => {
+describe('AlertComponent 테스트코드', () => {
   const saveEventMock = vi.fn();
   const setIsOverlapDialogOpenMock = vi.fn();
   const cancelRefMock = { current: null };
@@ -31,7 +31,7 @@ describe('AlertComponent', () => {
     expect(screen.getByText('일정 겹침 경고')).toBeInTheDocument();
   });
 
-  it('취소버튼을 클릭했을 때 다이얼로그가 닫히는지 확인합니다.', () => {
+  it('취소버튼을 클릭했을 때 다이얼로그가 닫히는지 확인', () => {
     renderComponent();
     const cancelButton = screen.getByText('취소');
     fireEvent.click(cancelButton);

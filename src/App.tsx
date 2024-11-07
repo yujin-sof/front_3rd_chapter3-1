@@ -1,28 +1,25 @@
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  Box,
-  CloseButton,
-  Flex,
-  Heading,
-  VStack,
-} from '@chakra-ui/react';
-import { useState, useRef } from 'react';
+import { Alert, AlertIcon, AlertTitle, Box, CloseButton, Flex, VStack } from '@chakra-ui/react';
 
 import { AlertComponent } from './components/AlertComponent.tsx';
 import { CalendarView } from './components/CalendarView.tsx';
 import { EventEdit } from './components/EventEdit.tsx';
 import { EventList } from './components/EventList.tsx';
-// import { Navigation } from './components/Navigation.tsx';
 import { useEventForm } from './hooks/useEventForm.ts';
 import { useEventOperations } from './hooks/useEventOperations.ts';
 import { useNotifications } from './hooks/useNotifications.ts';
+import { useOverlapDialog } from './hooks/useOverlapDialog.ts';
 
 function App() {
-  const [isOverlapDialogOpen, setIsOverlapDialogOpen] = useState(false);
-  const [overlappingEvents, setOverlappingEvents] = useState<Event[]>([]);
-  const cancelRef = useRef<HTMLButtonElement>(null);
+  // const [isOverlapDialogOpen, setIsOverlapDialogOpen] = useState(false);
+  // const [overlappingEvents, setOverlappingEvents] = useState<Event[]>([]);
+  // const cancelRef = useRef<HTMLButtonElement>(null);
+  const {
+    isOverlapDialogOpen,
+    setIsOverlapDialogOpen,
+    overlappingEvents,
+    setOverlappingEvents,
+    cancelRef,
+  } = useOverlapDialog();
 
   const { editingEvent, setEditingEvent } = useEventForm();
   const { events, saveEvent, deleteEvent } = useEventOperations(Boolean(editingEvent), () =>
